@@ -7,7 +7,7 @@ from utils.diagram import render_formation_svg
 
 st.set_page_config(page_title="OffenseIQ Scout Cards", layout="wide")
 
-PLAYER_LABELS = ["X", "Z", "Y", "H", "F", "T", "TE", "RB", "QB", "C", "G", "T2", "TE2", "Slot", "Motion"]
+PLAYER_LABELS = ["LT", "LG", "C", "RG", "RT", "X", "Z", "Y", "H", "F", "TE", "RB", "QB", "Slot", "Motion"]
 
 
 def get_field_options(master_df, col):
@@ -101,6 +101,17 @@ def main():
             col_editor, col_preview = st.columns([1, 1])
 
             with col_editor:
+                if st.button("➕ Add standard 5-man O-line", key=f"addol_{selected}"):
+                    ol = [
+                        {"label": "LT", "x": 30, "y": 62},
+                        {"label": "LG", "x": 40, "y": 62},
+                        {"label": "C", "x": 50, "y": 62},
+                        {"label": "RG", "x": 60, "y": 62},
+                        {"label": "RT", "x": 70, "y": 62},
+                    ]
+                    st.session_state[state_key] = ol + st.session_state[state_key]
+                    st.rerun()
+
                 st.markdown("**Add a position**")
                 c1, c2, c3 = st.columns([1, 1, 1])
                 with c1:
